@@ -1,0 +1,33 @@
+{
+  "name": "comment-plug",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --mode dev",
+    "test": "vite --mode test",
+    "uat": "vite --mode uat",
+    "stg": "vite --mode stg",
+    "prod": "vite --mode prod",
+    "build:dev": "vite build --mode dev",
+    "build:test": "vite build --mode test",
+    "build:uat": "vite build --mode uat",
+    "build:stg": "vite build --mode stg",
+    "build:prod": "vite build --mode prod",
+    "preview": "vite preview",
+    "build-lib": "vite build --target lib --name comment-plug --dest lib src/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "element-plus": "^2.2.4",
+    "vant": "^3.5.0",
+    "vue": "^3.2.25",
+    "vue-i18n": "^9.1.10",
+    "vue-lottie": "^0.2.1",
+    "vue-router": "^4.0.15",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "vite": "^2.9.9"
+  }
+}
