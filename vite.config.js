@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   envDir: './viteEnv',
   server: {
+    host: true,
     port: 8090,
     strictPort: true
   },
