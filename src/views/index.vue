@@ -1,6 +1,6 @@
+<!-- 评论组件入口 -->
 <template>
-  <!-- 评论组件入口 -->
-  <div class="ec_comment_entrance ec_comment_scroll">
+  <div class="plug_comment_entrance plug_comment_scroll">
     <!-- 根据应用场景不同 选择不同的组件 -->
     <component
       v-if="componentShow"
@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, watch } from 'vue'
   import { useStore } from 'vuex'
   import webEntrance from './web/index.vue'
   import h5Entrance from './app/index.vue'
@@ -191,66 +191,108 @@
   let componentShow = ref(false)
   
   // 多语言格式统一
-    const langUpper = propList.language.toUpperCase()
-    let lang = 'zh_CN'
-    if (langUpper.indexOf('EN') > -1) {
-      lang = 'en_US'
-    } else if (langUpper.indexOf('TW') > -1) {
-      lang =  'zh_TW'
+  const langUpper = propList.language.toUpperCase()
+  let lang = 'zh_CN'
+  if (langUpper.indexOf('EN') > -1) {
+    lang = 'en_US'
+  } else if (langUpper.indexOf('TW') > -1) {
+    lang =  'zh_TW'
+  }
+  // 应用类型统一
+  // 1 PC 2 android 3 iOS 4 H5
+  let appType = '';
+  if (propList.applicationType) {
+    let typeUp = propList.applicationType.toUpperCase()
+    if (typeUp === 'WEB') {
+      appType = 1
+    } else if (typeUp === 'ANDROID') {
+      appType = 2
+    } else if (typeUp === 'IOS') {
+      appType = 3
+    } else {
+      appType = 4
     }
-    // 应用类型统一
-    // 1 PC 2 android 3 iOS 4 H5
-    let appType = '';
-    if (propList.applicationType) {
-      let typeUp = propList.applicationType.toUpperCase()
-      if (typeUp === 'WEB') {
-        appType = 1
-      } else if (typeUp === 'ANDROID') {
-        appType = 2
-      } else if (typeUp === 'IOS') {
-        appType = 3
-      } else {
-        appType = 4
+  }
+  const store = useStore()
+  store.commit('PLUG_APPLICATION_SCENARIO', propList.applicationScenario)
+  store.commit('PLUG_SCENE_CODE', propList.sceneCode)
+  store.commit('PLUG_APP_CODE', propList.appCode)
+  store.commit('PLUG_LANGUAGE', lang)
+  store.commit('PLUG_THEME_COLOR', propList.themeColor)
+  store.commit('PLUG_TENANT_TOKEN', propList.tenantToken)
+  store.commit('PLUG_APPLICATION_TYPE', appType)
+  store.commit('PLUG_SORT_STATE', propList.sortState)
+  store.commit('PLUG_CUSTOM_COMMENT_STATE', propList.customCommentState)
+  store.commit('PLUG_CUSTOM_COMMENT_DELETE_STATE', propList.customCommentDeleteState)
+  store.commit('PLUG_CUSTOM_COMMENT_PHOTO_SEE_STATE', propList.customCommentPhotoSeeState)
+  store.commit('PLUG_COMMENT_WORD_MAX', propList.commentWordMax)
+  store.commit('PLUG_COMMENT_PHOTO_MAX', propList.commentPhotoMax)
+  store.commit('PLUG_REPLY_WORD_MAX', propList.replyWordMax)
+  store.commit('PLUG_REPLY_PHOTO_STATE', propList.replyPhotoState)
+  store.commit('PLUG_REPLY_PHOTO_MAX', propList.replyPhotoMax)
+  store.commit('PLUG_WEB_COMMENT_PUBLISH', propList.webCommentPublish)
+  store.commit('PLUG_WEB_FIXED_BOX_STATE', propList.webFixedBoxState)
+  store.commit('PLUG_WEB_FIXED_BOX_LIKE_STATE', propList.webFixedBoxLikeState)
+  store.commit('PLUG_WEB_FIXED_BOX_LIKE_NAME', propList.webFixedBoxLikeName)
+  store.commit('PLUG_WEB_FIXED_BOX_BOTTOM', typeof(propList.webFixedBoxBottom) == 'string' ? propList.webFixedBoxBottom : `${propList.webFixedBoxBottom}px`)
+  store.commit('PLUG_WEB_FIXED_BOX_RIGHT', typeof(propList.webFixedBoxRight) == 'string' ? propList.webFixedBoxRight : `${propList.webFixedBoxRight}px`)
+  store.commit('PLUG_QUICK_ENTRANCE', propList.quickEntrance)
+  store.commit('PLUG_APP_FIXED_BOX_STATE', propList.appFixedBoxState)
+  store.commit('PLUG_APP_FIXED_BOX_LIKE_STATE', propList.appFixedBoxLikeState)
+  store.commit('PLUG_BUTTON_TYPE', propList.buttonType)
+  store.commit('PLUG_BUTTON_NAME', propList.buttonName)
+  store.commit('PLUG_BUTTON_STYLE', propList.buttonStyle)
+  store.commit('PLUG_IOS_BOTTOM', propList.iOSBottom)
+
+  // 组件显示 
+  onMounted(() => {
+    componentShow.value = true
+  })
+
+  // 监听数据变化
+  watch(() => ({...propList}), (newValue, oldValue) => {
+    if (newValue.language !== oldValue.language) {
+      // 多语言格式统一
+      const langUpper = propList.language.toUpperCase()
+      let lang = 'zh_CN'
+      if (langUpper.indexOf('EN') > -1) {
+        lang = 'en_US'
+      } else if (langUpper.indexOf('TW') > -1) {
+        lang =  'zh_TW'
       }
+      store.commit('PLUG_LANGUAGE', lang)
     }
-    const store = useStore()
-    store.commit('EC_APPLICATION_SCENARIO', propList.applicationScenario)
-    store.commit('EC_SCENE_CODE', propList.sceneCode)
-    store.commit('EC_APP_CODE', propList.appCode)
-    store.commit('EC_LANGUAGE', lang)
-    store.commit('EC_THEME_COLOR', propList.themeColor)
-    store.commit('EC_TENANT_TOKEN', propList.tenantToken)
-    store.commit('EC_APPLICATION_TYPE', appType)
-    store.commit('EC_SORT_STATE', propList.sortState)
-    store.commit('EC_CUSTOM_COMMENT_STATE', propList.customCommentState)
-    store.commit('EC_CUSTOM_COMMENT_DELETE_STATE', propList.customCommentDeleteState)
-    store.commit('EC_CUSTOM_COMMENT_PHOTO_SEE_STATE', propList.customCommentPhotoSeeState)
-    store.commit('EC_COMMENT_WORD_MAX', propList.commentWordMax)
-    store.commit('EC_COMMENT_PHOTO_MAX', propList.commentPhotoMax)
-    store.commit('EC_REPLY_WORD_MAX', propList.replyWordMax)
-    store.commit('EC_REPLY_PHOTO_STATE', propList.replyPhotoState)
-    store.commit('EC_REPLY_PHOTO_MAX', propList.replyPhotoMax)
-    store.commit('EC_WEB_COMMENT_PUBLISH', propList.webCommentPublish)
-    store.commit('EC_WEB_FIXED_BOX_STATE', propList.webFixedBoxState)
-    store.commit('EC_WEB_FIXED_BOX_LIKE_STATE', propList.webFixedBoxLikeState)
-    store.commit('EC_WEB_FIXED_BOX_LIKE_NAME', propList.webFixedBoxLikeName)
-    store.commit('EC_WEB_FIXED_BOX_BOTTOM', typeof(propList.webFixedBoxBottom) == 'string' ? propList.webFixedBoxBottom : `${propList.webFixedBoxBottom}px`)
-    store.commit('EC_WEB_FIXED_BOX_RIGHT', typeof(propList.webFixedBoxRight) == 'string' ? propList.webFixedBoxRight : `${propList.webFixedBoxRight}px`)
-    store.commit('EC_QUICK_ENTRANCE', propList.quickEntrance)
-    store.commit('EC_APP_FIXED_BOX_STATE', propList.appFixedBoxState)
-    store.commit('EC_APP_FIXED_BOX_LIKE_STATE', propList.appFixedBoxLikeState)
-    store.commit('EC_BUTTON_TYPE', propList.buttonType)
-    store.commit('EC_BUTTON_NAME', propList.buttonName)
-    store.commit('EC_BUTTON_STYLE', propList.buttonStyle)
-    store.commit('EC_IOS_BOTTOM', propList.iOSBottom)
-    // 组件显示 
-    onMounted(() => {
-      componentShow = true
-    })
+    if (newValue.themeColor !== oldValue.themeColor) {
+      store.commit('PLUG_THEME_COLOR', propList.themeColor)
+    }
+  }, {
+    // immediate: true,
+    deep: true
+  })
+
+  // 子传父
+  const emit = defineEmits(['customCommentPopup', 'customCommentDeletePopup', 'customCommentPhotoSeePopup', 'handleHeadPortrait'])
+  // 自定义评论回复
+  function customCommentPopup(val) {
+    emit('customCommentPopup', val)
+  }
+  // 自定义评论删除
+  function customCommentDeletePopup(val) {
+    emit('customCommentDeletePopup', val)
+  }
+  // 自定义评论图片查看
+  function customCommentPhotoSeePopup(val) {
+    emit('customCommentPhotoSeePopup', val)
+  }
+  // 头像点击
+  function handleHeadPortrait(val) {
+    emit('handleHeadPortrait', val)
+  }
+  // defineExpose({})  // 向父组件暴露自己的属性
 </script>
 
 <style>
-.ec_comment_entrance {
+.plug_comment_entrance {
   width: 100%;
   height: auto;
   margin: 0 auto;

@@ -1,10 +1,10 @@
-<script setup>
-  import comment from './views/index.vue'
-</script>
-
 <template>
-  <comment></comment>
+  <router-view />
 </template>
+
+<script setup>
+ 
+</script>
 
 <style>
 #app {

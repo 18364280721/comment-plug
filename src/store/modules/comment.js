@@ -1,185 +1,185 @@
 const comment = {
   data: {
     // 组件参数
-    ecApplicationScenario: '', // 应用场景
-    ecSceneCode: 0, // 使用场景
-    ecAppCode: '', // 场景码
-    ecLanguage: '', // 语言环境
-    ecThemeColor: '', // 主题色
-    ecTenantToken: '', // token值
-    ecApplicationType: '', // 应用类型
-    ecSortState: false, // 排序是否显示
-    ecCustomCommentState: false, // 是否启用自定义评论框
-    ecCustomCommentDeleteState: false, // 是否启用自定义评论删除
-    ecCustomCommentPhotoSeeState: false, // 是否启用自定义评论图片查看
-    ecCommentWordMax: 500, // 评论文字最大数量
-    ecCommentPhotoMax: 9, // 评论图片最大数量
-    ecReplyWordMax: 100, // 回复文字最大数量
-    ecReplyPhotoState: false, // 回复是否上传图片
-    ecReplyPhotoMax: 9, // 回复图片最大数量
-    ecWebCommentPublish: false, // 页面评论框是否显示
-    ecWebFixedBoxState: false, // web详情页悬浮框是否显示
-    ecWebFixedBoxLikeState: true, // web详情页悬浮框点赞是否显示
-    ecWebFixedBoxLikeName: '', // web详情页悬浮框点赞按钮名称
-    ecWebFixedBoxBottom: 50, // web详情页悬浮框距离底部距离
-    ecWebFixedBoxRight: 50, // web详情页悬浮框距离右侧距离
-    ecAppFixedBoxState: false, // app详情页悬浮框是否显示
-    ecAppFixedBoxLikeState: false, // app详情页悬浮框点赞是否显示
-    ecQuickEntrance: 0, // 快捷入口
-    ecButtonType: 0, // 按钮类型
-    ecButtonName: '', // 按钮名称
-    ecButtonStyle: {}, // 按钮样式
-    eciOSBottom: 0, // iOS底部刘海
+    plugApplicationScenario: '', // 应用场景
+    plugSceneCode: 0, // 使用场景
+    plugAppCode: '', // 场景码
+    plugLanguage: '', // 语言环境
+    plugThemeColor: '', // 主题色
+    plugTenantToken: '', // token值
+    plugApplicationType: '', // 应用类型
+    plugSortState: false, // 排序是否显示
+    plugCustomCommentState: false, // 是否启用自定义评论框
+    plugCustomCommentDeleteState: false, // 是否启用自定义评论删除
+    plugCustomCommentPhotoSeeState: false, // 是否启用自定义评论图片查看
+    plugCommentWordMax: 500, // 评论文字最大数量
+    plugCommentPhotoMax: 9, // 评论图片最大数量
+    plugReplyWordMax: 100, // 回复文字最大数量
+    plugReplyPhotoState: false, // 回复是否上传图片
+    plugReplyPhotoMax: 9, // 回复图片最大数量
+    plugWebCommentPublish: false, // 页面评论框是否显示
+    plugWebFixedBoxState: false, // web详情页悬浮框是否显示
+    plugWebFixedBoxLikeState: true, // web详情页悬浮框点赞是否显示
+    plugWebFixedBoxLikeName: '', // web详情页悬浮框点赞按钮名称
+    plugWebFixedBoxBottom: 50, // web详情页悬浮框距离底部距离
+    plugWebFixedBoxRight: 50, // web详情页悬浮框距离右侧距离
+    plugAppFixedBoxState: false, // app详情页悬浮框是否显示
+    plugAppFixedBoxLikeState: false, // app详情页悬浮框点赞是否显示
+    plugQuickEntrance: 0, // 快捷入口
+    plugButtonType: 0, // 按钮类型
+    plugButtonName: '', // 按钮名称
+    plugButtonStyle: {}, // 按钮样式
+    plugiOSBottom: 0, // iOS底部刘海
     // 评论数据
-    ecTopicId: '', // topicId
-    ecReplyCommentId: '', // 回复ID
-    ecCommentCount: 0, // 详情 评论总数量
-    ecLikeState: false, // 详情 点赞状态
-    ecLikeCount: 0 // 详情 点赞数量
+    plugTopicId: '', // topicId
+    plugReplyCommentId: '', // 回复ID
+    plugCommentCount: 0, // 详情 评论总数量
+    plugLikeState: false, // 详情 点赞状态
+    plugLikeCount: 0 // 详情 点赞数量
   },
   mutations: {
     /**
      * 组件参数
      */
     // 应用场景
-    EC_APPLICATION_SCENARIO(state, value) {
-      state.ecApplicationScenario = value
+    PLUG_APPLICATION_SCENARIO(state, value) {
+      state.plugApplicationScenario = value
     },
     // 使用场景
-    EC_SCENE_CODE(state, value) {
-      state.ecSceneCode = value
+    PLUG_SCENE_CODE(state, value) {
+      state.plugSceneCode = value
     },
     // 场景码
-    EC_APP_CODE(state, value) {
-      state.ecAppCode = value
+    PLUG_APP_CODE(state, value) {
+      state.plugAppCode = value
     },
     // 语言环境
-    EC_LANGUAGE(state, value) {
-      state.ecLanguage = value
+    PLUG_LANGUAGE(state, value) {
+      state.plugLanguage = value
     },
     // 主题色
-    EC_THEME_COLOR(state, value) {
-      state.ecThemeColor = value
+    PLUG_THEME_COLOR(state, value) {
+      state.plugThemeColor = value
     },
     // token值
-    EC_TENANT_TOKEN(state, value) {
-      state.ecTenantToken = value
+    PLUG_TENANT_TOKEN(state, value) {
+      state.plugTenantToken = value
     },
     // 应用类型
-    EC_APPLICATION_TYPE(state, value) {
-      state.ecApplicationType = value
+    PLUG_APPLICATION_TYPE(state, value) {
+      state.plugApplicationType = value
     },
     // 排序是否显示
-    EC_SORT_STATE(state, value) {
-      state.ecSortState = value
+    PLUG_SORT_STATE(state, value) {
+      state.plugSortState = value
     },
     // 是否启用自定义评论框
-    EC_CUSTOM_COMMENT_STATE(state, value) {
-      state.ecCustomCommentState = value
+    PLUG_CUSTOM_COMMENT_STATE(state, value) {
+      state.plugCustomCommentState = value
     },
     // 是否启用自定义评论删除
-    EC_CUSTOM_COMMENT_DELETE_STATE(state, value) {
-      state.ecCustomCommentDeleteState = value
+    PLUG_CUSTOM_COMMENT_DELETE_STATE(state, value) {
+      state.plugCustomCommentDeleteState = value
     },
     // 是否启用自定义评论图片查看
-    EC_CUSTOM_COMMENT_PHOTO_SEE_STATE(state, value) {
-      state.ecCustomCommentPhotoSeeState = value
+    PLUG_CUSTOM_COMMENT_PHOTO_SEE_STATE(state, value) {
+      state.plugCustomCommentPhotoSeeState = value
     },
     // 评论文字最大数量
-    EC_COMMENT_WORD_MAX(state, value) {
-      state.ecCommentWordMax = value
+    PLUG_COMMENT_WORD_MAX(state, value) {
+      state.plugCommentWordMax = value
     },
     // 评论图片最大数量
-    EC_COMMENT_PHOTO_MAX(state, value) {
-      state.ecCommentPhotoMax = value
+    PLUG_COMMENT_PHOTO_MAX(state, value) {
+      state.plugCommentPhotoMax = value
     },
     // 回复文字最大数量
-    EC_REPLY_WORD_MAX(state, value) {
-      state.ecReplyWordMax = value
+    PLUG_REPLY_WORD_MAX(state, value) {
+      state.plugReplyWordMax = value
     },
     // 回复是否上传图片
-    EC_REPLY_PHOTO_STATE(state, value) {
-      state.ecReplyPhotoState = value
+    PLUG_REPLY_PHOTO_STATE(state, value) {
+      state.plugReplyPhotoState = value
     },
     // 回复图片最大数量
-    EC_REPLY_PHOTO_MAX(state, value) {
-      state.ecReplyPhotoMax = value
+    PLUG_REPLY_PHOTO_MAX(state, value) {
+      state.plugReplyPhotoMax = value
     },
     // 页面评论框是否显示
-    EC_WEB_COMMENT_PUBLISH(state, value) {
-      state.ecWebCommentPublish = value
+    PLUG_WEB_COMMENT_PUBLISH(state, value) {
+      state.plugWebCommentPublish = value
     },
     // web详情页悬浮框是否显示
-    EC_WEB_FIXED_BOX_STATE(state, value) {
-      state.ecWebFixedBoxState = value
+    PLUG_WEB_FIXED_BOX_STATE(state, value) {
+      state.plugWebFixedBoxState = value
     },
     // web详情页悬浮框点赞是否显示
-    EC_WEB_FIXED_BOX_LIKE_STATE(state, value) {
-      state.ecWebFixedBoxLikeState = value
+    PLUG_WEB_FIXED_BOX_LIKE_STATE(state, value) {
+      state.plugWebFixedBoxLikeState = value
     },
     // web详情页悬浮框点赞按钮名称
-    EC_WEB_FIXED_BOX_LIKE_NAME(state, value) {
-      state.ecWebFixedBoxLikeName = value
+    PLUG_WEB_FIXED_BOX_LIKE_NAME(state, value) {
+      state.plugWebFixedBoxLikeName = value
     },
     // web详情页悬浮框距离底部距离
-    EC_WEB_FIXED_BOX_BOTTOM(state, value) {
-      state.ecWebFixedBoxBottom = value
+    PLUG_WEB_FIXED_BOX_BOTTOM(state, value) {
+      state.plugWebFixedBoxBottom = value
     },
     // web详情页悬浮框距离右侧距离
-    EC_WEB_FIXED_BOX_RIGHT(state, value) {
-      state.ecWebFixedBoxRight = value
+    PLUG_WEB_FIXED_BOX_RIGHT(state, value) {
+      state.plugWebFixedBoxRight = value
     },
     // app详情页悬浮框是否显示
-    EC_APP_FIXED_BOX_STATE(state, value) {
-      state.ecAppFixedBoxState = value
+    PLUG_APP_FIXED_BOX_STATE(state, value) {
+      state.plugAppFixedBoxState = value
     },
     // app详情页悬浮框点赞是否显示
-    EC_APP_FIXED_BOX_LIKE_STATE(state, value) {
-      state.ecAppFixedBoxLikeState = value
+    PLUG_APP_FIXED_BOX_LIKE_STATE(state, value) {
+      state.plugAppFixedBoxLikeState = value
     },
     // 快捷入口
-    EC_QUICK_ENTRANCE(state, value) {
-      state.ecQuickEntrance = value
+    PLUG_QUICK_ENTRANCE(state, value) {
+      state.plugQuickEntrance = value
     },
     // 按钮类型
-    EC_BUTTON_TYPE(state, value) {
-      state.ecButtonType = value
+    PLUG_BUTTON_TYPE(state, value) {
+      state.plugButtonType = value
     },
     // 按钮名称
-    EC_BUTTON_NAME(state, value) {
-      state.ecButtonName = value
+    PLUG_BUTTON_NAME(state, value) {
+      state.plugButtonName = value
     },
     // 按钮样式
-    EC_BUTTON_STYLE(state, value) {
-      state.ecButtonStyle = value
+    PLUG_BUTTON_STYLE(state, value) {
+      state.plugButtonStyle = value
     },
     // iOS底部刘海
-    EC_IOS_BOTTOM(state, value) {
-      state.eciOSBottom = value
+    PLUG_IOS_BOTTOM(state, value) {
+      state.plugiOSBottom = value
     },
     
     /**
      * 评论数据
      */
     // TopicId
-    EC_TOPIC_ID(state, value) {
-      state.ecTopicId = value
+    PLUG_TOPIC_ID(state, value) {
+      state.plugTopicId = value
     },
     // 回复ID
-    EC_REPLY_COMMENT_ID(state, value) {
-      state.ecReplyCommentId = value
+    PLUG_REPLY_COMMENT_ID(state, value) {
+      state.plugReplyCommentId = value
     },
     // 详情 评论数量
-    EC_COMMENT_COUNT: (state, value) => {
-      state.ecCommentCount = value
+    PLUG_COMMENT_COUNT: (state, value) => {
+      state.plugCommentCount = value
     },
     // 详情 点赞数量
-    EC_LIKE_COUNT: (state, value) => {
-      state.ecLikeCount = value
+    PLUG_LIKE_COUNT: (state, value) => {
+      state.plugLikeCount = value
     },
     // 详情 点赞状态
-    EC_LIKE_STATE: (state, value) => {
-      state.ecLikeState = value
+    PLUG_LIKE_STATE: (state, value) => {
+      state.plugLikeState = value
     }
   },
   actions: {}
