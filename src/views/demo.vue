@@ -1,14 +1,14 @@
 <template>
   <comment
-  applicationScenario="web"
-  :language="language"></comment>
+    application-scenario="web"
+    :language="language" />
 </template>
 
-<script setup>
+<script setup name="demo">
 import { ref } from 'vue'
 import comment from './index.vue'
 
-let language = ref('')
+const language = ref('')
 console.log(language)
 setTimeout(() => {
   language.value = 'zh_TW'

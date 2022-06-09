@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex'
 import comment from './modules/comment'
 
 export default createStore({

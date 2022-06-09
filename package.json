@@ -17,8 +17,10 @@
     "build-lib": "vite build --target lib --name comment-plug --dest lib src/index.js"
   },
   "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^1.3.10",
     "axios": "^0.27.2",
     "element-plus": "^2.2.4",
+    "mockjs": "^1.1.0",
     "vant": "^3.5.0",
     "vue": "^3.2.25",
     "vue-i18n": "^9.1.10",
@@ -27,7 +29,17 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
     "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "^2.9.9"
+    "eslint": "^8.17.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.2",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.1.0",
+    "sass": "^1.52.3",
+    "vite": "^2.9.9",
+    "vite-plugin-eslint": "^1.6.1",
+    "vite-plugin-mock": "^2.9.6"
   }
 }
