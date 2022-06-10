@@ -11,10 +11,10 @@
       :custom-h-t-m-l="customHTML"
       :custom-comment-result="customCommentResult"
       :custom-comment-delete-result="customCommentDeleteResult"
-      @handleCustom="handleCustom"
-      @getMoreComments="getMoreComments"
-      @handleButton="handleButton"
-      @handleHome="handleHome"
+      @handleCustom="emit('handleCustom')"
+      @getMoreComments="emit('getMoreComments')"
+      @handleButton="emit('handleButton')"
+      @handleHome="emit('handleHome')"
       @customCommentPopup="customCommentPopup"
       @customCommentDeletePopup="customCommentDeletePopup"
       @customCommentPhotoSeePopup="customCommentPhotoSeePopup"
@@ -289,22 +289,7 @@ const emit = defineEmits([
   'customCommentPhotoSeePopup',
   'handleHeadPortrait'
 ])
-// 动态自定义功能按钮
-function handleCustom (val) {
-  emit('handleCustom', val)
-}
-// 查看更多
-function getMoreComments (val) {
-  emit('getMoreComments', val)
-}
-// 底部浮动按钮
-function handleButton (val) {
-  emit('handleButton', val)
-}
-// app星选返回首页
-function handleHome (val) {
-  emit('handleHome', val)
-}
+
 // 自定义评论回复
 function customCommentPopup (val) {
   emit('customCommentPopup', val)

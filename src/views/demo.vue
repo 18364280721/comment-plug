@@ -9,7 +9,6 @@ import { ref } from 'vue'
 import comment from './index.vue'
 
 const language = ref('')
-console.log(language)
 setTimeout(() => {
   language.value = 'zh_TW'
 }, 5000)

@@ -3,6 +3,9 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslintPlugin from 'vite-plugin-eslint'
 import { viteMockServe } from 'vite-plugin-mock'
 import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -80,6 +83,12 @@ export default defineConfig({
       // prodEnabled: boolean;--设置打包是否启用 mock 功能
       // injectFile: string;--如果生产环境开启了 mock 功能,即prodEnabled=true.则该代码会被注入到injectFile对应的文件的底部。默认为main.{ts,js}。这样做的好处是,可以动态控制生产环境是否开启 mock 且在没有开启的时候 mock.js 不会被打包。如果代码直接写在main.ts内，则不管有没有开启,最终的打包都会包含mock.js
       // injectCode: string;--injectCode代码注入的文件,默认为项目根目录下src/main.{ts,js}
+    }),
+    AutoImport({ // element-plus按需引入
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({ // element-plus按需引入
+      resolvers: [ElementPlusResolver()]
     })
   ]
 })
