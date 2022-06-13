@@ -1,23 +1,26 @@
 import axios from 'axios'
+import store from '@/store'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: import.meta.env.VITE_API_DOMAIN, // api的base_url
+  baseURL: import.meta.env.VITE_API_URL, // api的base_url
   timeout: 15000, // 请求超时时间
   validateStatus: function(status) {
     return status >= 200 // 默认的
   }
 })
-
 // http request 拦截器
-axios.interceptors.request.use(
+service.interceptors.request.use(
   config => {
     // 配置请求头
-    config.headers = {
+    console.log(config)
+    const headers = {
       //'Content-Type':'application/x-www-form-urlencoded',   // 传参方式表单
       'Content-Type':'application/json;charset=UTF-8',        // 传参方式json
-      'token':'80c483d59ca86ad0393cf8a98416e2a1'              // 这里自定义配置，这里传的是token
+      'Authorization': `Bearer ${store.state.moduleComment.plugTenantToken}`, // 这里自定义配置，这里传的是token
+      'language': store.state.moduleComment.plugLanguage
     }
+    config.headers = {...config.headers, ...headers}
     return config
   },error => {
     Promise.reject(error)

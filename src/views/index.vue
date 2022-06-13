@@ -6,7 +6,6 @@
       :is="entranceName"
       v-if="componentShow"
       :source-id="sourceId"
-      :theme-id="themeId"
       :dynamic-like-comment-state="dynamicLikeCommentState"
       :custom-h-t-m-l="customHTML"
       :custom-comment-result="customCommentResult"
@@ -40,7 +39,7 @@ const propList = defineProps({
   // 必传字段***********************************
   applicationScenario: { // 应用场景 web h5
     type: String,
-    default: ''
+    default: 'web'
   },
   sceneCode: { // 使用场景(0默认 内页详情 1 动态 同事圈)
     type: Number,
@@ -48,11 +47,11 @@ const propList = defineProps({
   },
   appCode: { // 场景码(article-publish 文章  activity-two-management 活动  innovation-contestant 星选  latest_news 动态)
     type: String,
-    default: ''
+    default: 'article-publish'
   },
   sourceId: { // 场景类型ID(文章ID 活动ID 选手ID 动态ID)
     type: [String, Number],
-    default: '' // 6288f6ac19c87d0006a8fc0e
+    default: '12885' // 6288f6ac19c87d0006a8fc0e
   },
   language: { // 语言环境(默认中文)
     type: String,
@@ -64,14 +63,10 @@ const propList = defineProps({
   },
   tenantToken: { // token值
     type: String,
-    default: '' // 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJvdUlkXCI6MzUwNDAyLFwicGhvbmVcIjpcIjEzMTIyMDkxMDAwXCIsXCJtb2JpbGVBcmVhY29kZVwiOlwiMTExXCIsXCJ0ZW5hbnRJZFwiOlwiODRkMDkyZDgtOGRlNS00ZDViLThkZjUtNjg2ZmJjNzM1OTliXCIsXCJwZXJzb25JZFwiOlwiNjA2MTc3MzUyZGJiYmYwMDA2MTgyNGZiXCIsXCJ0ZW5hbnRDb2RlXCI6XCJFY29UZXN0MDAyXCIsXCJpZE51bWJlclwiOlwiNDExNTIxMjAxNTA4MDEwMTAxXCIsXCJsb2NhbGVcIjpcInpoX0NOXCIsXCJ1c2VySWRcIjpcIjYwNjE3NzM1MmRiYmJmMDAwNjE4MjRmYlwiLFwidXNlcm5hbWVcIjpcIkpZMDAxXCJ9IiwiZXhwIjoxNjczNDgzNzc0LCJhdWQiOiIiLCJhdXRoIjoiUk9MRV9NTVQsUk9MRV9IUixST0xFX0VNUCxST0xFX01BTkFHRVIiLCJpc3MiOiJodHRwczovL3Rlc3Qtc3AuZWNvc2Fhcy5jb20vY2RwTG9nb3V0L2xvZ291dD9qd3Q9JHtKV1R9IiwiaWF0IjoiIiwic2lkIjoiZmExNzZmMzQtODY4YS00YWM1LWE4MGUtMzEwODRlNGY2ZGNjIn0.Ce6N7rQnk8pgfBHmRyXj7XqD9OuRdRXvjUZacXQwz_fkdiqoRd5A22lEiNfx7dauuG0-82Y229C_90QBpZqX8w'
+    default: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJvdUlkXCI6MzU1NDM4LFwicGhvbmVcIjpcIjEzMTIyMDkyMjAxXCIsXCJtb2JpbGVBcmVhY29kZVwiOlwiXCIsXCJ0ZW5hbnRJZFwiOlwiODRkMDkyZDgtOGRlNS00ZDViLThkZjUtNjg2ZmJjNzM1OTliXCIsXCJwZXJzb25JZFwiOlwiNjA3Zjk3YjZkNDg3MWEwMDA3NjJhMjUxXCIsXCJ0ZW5hbnRDb2RlXCI6XCJFY29UZXN0MDAyXCIsXCJsb2NhbGVcIjpcInpoX0NOXCIsXCJ1c2VySWRcIjpcIjYwN2Y5N2I2ZDQ4NzFhMDAwNzYyYTI1MVwiLFwiZW1haWxcIjpcIlpvZS5aZW5nQGNkcGdyb3VwbHRkLmNvbVwiLFwidXNlcm5hbWVcIjpcIkpZMDAyXCJ9IiwiZXhwIjoxNjgwMTMyMDYzLCJhdWQiOiIiLCJhdXRoIjoiUk9MRV9NTVQsUk9MRV9IUixST0xFX0VNUCIsImlzcyI6Imh0dHBzOi8vdGVzdC1zcC5lY29zYWFzLmNvbS9jZHBMb2dvdXQvbG9nb3V0P2p3dD0ke0pXVH0iLCJpYXQiOiIiLCJzaWQiOiJlNzVjMzRiYi02M2MxLTQ1MDgtYWM2MS1mOGZkOGIwMDY3N2EifQ.NKhaCNb6RpwCUMOmkz4rByNdRVgBGakOQuYe2pGh4gQF0RcHngBWK3MesadNu5zWFgbgBa1hF2b4ET4zCwUwjw'
   },
   // 非必传字段 ***********************************
   applicationType: { // 应用类型 android iOS Chrome 飞书等
-    type: String,
-    default: ''
-  },
-  themeId: { // 动态默认传空或者all 分多个主题tab时 传主题id 如同事圈
     type: String,
     default: ''
   },

@@ -34,7 +34,6 @@
       ref="webCommentList"
       :topicId="topicId"
       :sourceId="sourceId"
-      :themeId="themeId"
       :commentCount="commentCount"
       :commentList="commentList"
       @getCommentList="getCommentList"
@@ -53,8 +52,9 @@
 </template>
 
 <script setup name="webEntrance">
-import { ref, reactive, nextTick } from 'vue'
+import { ref, reactive, nextTick, onMounted, inject } from 'vue'
 import { useStore } from 'vuex'
+import comment from '@/api/comment'
 import FuncLikeComment from './Common/FuncLikeComment.vue'
 import CommentPublish from './Common/CommentPublish.vue'
 import CommentTitle from './Details/CommentTitle.vue'
@@ -63,9 +63,6 @@ import SuspendedLikeComment from './Details/SuspendedLikeComment.vue'
 
 const propList = defineProps({
   sourceId: { // 场景类型ID
-    type: String
-  },
-  themeId: { // 动态的主题ID
     type: String
   },
   dynamicLikeCommentState: { // 动态 点赞评论显示
@@ -92,12 +89,18 @@ const language = store.state.comment.plugLanguage
 const webCommentPublish = store.state.comment.plugWebCommentPublish
 const webFixedBoxState = store.state.comment.plugWebFixedBoxState
 
+onMounted(() => {
+  getCommentList()
+})
+
+//获取上下文实例，ctx=vue2的this
+const $bizCode = inject('$bizCode')
 // 获取评论列表
 function getCommentList (pageNum, sortValue) {
   const params = {
     app_code: appCode,
     source_id: propList.sourceId,
-    theme_id: propList.themeId,
+    theme_id: '',
     language: language,
     page: 1,	 
     page_size: 10,
@@ -110,8 +113,9 @@ function getCommentList (pageNum, sortValue) {
   if (sortValue) {
     params.sort_type = sortValue
   }
-  ecComment.getCommentList(params).then(res => {
-    if(res.data.bizCode === this.$ecBizCode.success) {
+  comment.getCommentList(params).then(res => {
+    console.log(res)
+    if(res.data.bizCode === $bizCode.success) {
       const resList = res.data.data
       const webCommentList = ref(null)
       if (pageNum > 1) {
