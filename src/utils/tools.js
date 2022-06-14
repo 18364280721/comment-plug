@@ -7,6 +7,7 @@ import store from '@/store'
 
 // 时间转换
 export function getTimer(date) {
+  if (!date) return
   let minute = 1000 * 60;
   let hour = minute *60;
   let stringTime = date.replace(/[\-]/g,'/')

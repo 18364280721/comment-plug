@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import comment from './modules/comment'
+import moduleComment from './modules/comment'
 
 export default createStore({
   data: {},
@@ -7,6 +7,6 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    comment
+    moduleComment
   }
 })

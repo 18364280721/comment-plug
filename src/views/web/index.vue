@@ -52,7 +52,7 @@
 </template>
 
 <script setup name="webEntrance">
-import { ref, reactive, nextTick, onMounted, inject } from 'vue'
+import { ref, reactive, nextTick, onMounted, inject, computed } from 'vue'
 import { useStore } from 'vuex'
 import comment from '@/api/comment'
 import FuncLikeComment from './Common/FuncLikeComment.vue'
@@ -73,6 +73,8 @@ const propList = defineProps({
   }
 })
 
+const emit = defineEmits(['handleCustom', 'getMoreComments', 'handleHeadPortrait'])
+
 // 数据初始化
 let commentList = reactive([]) // 评论列表
 let topicId = ref('') // topicId
@@ -81,19 +83,30 @@ let likeState = ref(false) // 动态 主题点赞状态
 let likeCount = ref(0) // 动态 主题点赞数量
 let dynamicCommentShow = ref(false) // 动态评论框显示
 
-// store
+// 计算属性
 const store = useStore()
-const sceneCode = store.state.comment.plugSceneCode
-const appCode = store.state.comment.plugAppCode
-const language = store.state.comment.plugLanguage
-const webCommentPublish = store.state.comment.plugWebCommentPublish
-const webFixedBoxState = store.state.comment.plugWebFixedBoxState
+const sceneCode = computed(() => {
+  return store.state.moduleComment.plugSceneCode
+})
+const appCode = computed(() => {
+  return store.state.moduleComment.plugAppCode
+})
+const language = computed(() => {
+  return store.state.moduleComment.plugLanguage
+})
+const webCommentPublish = computed(() => {
+  return store.state.moduleComment.plugWebCommentPublish
+})
+const webFixedBoxState = computed(() => {
+  return store.state.moduleComment.plugWebFixedBoxState
+})
 
+// DOM加载完
 onMounted(() => {
   getCommentList()
 })
 
-//获取上下文实例，ctx=vue2的this
+//获取上下文实例
 const $bizCode = inject('$bizCode')
 // 获取评论列表
 function getCommentList (pageNum, sortValue) {
@@ -114,7 +127,6 @@ function getCommentList (pageNum, sortValue) {
     params.sort_type = sortValue
   }
   comment.getCommentList(params).then(res => {
-    console.log(res)
     if(res.data.bizCode === $bizCode.success) {
       const resList = res.data.data
       const webCommentList = ref(null)
@@ -133,10 +145,10 @@ function getCommentList (pageNum, sortValue) {
         likeState.value = resList.liked
         likeCount.value = +resList.like_count
         if (sceneCode === 0) {
-          store.commit('EC_TOPIC_ID', resList.topic_id)
-          store.commit('EC_COMMENT_COUNT', +resList.comment_count)
-          store.commit('EC_LIKE_COUNT', resList.like_count)
-          store.commit('EC_LIKE_STATE', resList.liked)
+          store.commit('PLUG_TOPIC_ID', resList.topic_id)
+          store.commit('PLUG_COMMENT_COUNT', +resList.comment_count)
+          store.commit('PLUG_LIKE_COUNT', resList.like_count)
+          store.commit('PLUG_LIKE_STATE', resList.liked)
           nextTick(() => {
             if (webCommentList) {
               webCommentList.noMore = false
@@ -159,7 +171,7 @@ function pushComment (e) {
     dynamicCommentShow.value = false
     commentCount.value++
     if (sceneCode === 0) {
-      store.commit('EC_COMMENT_COUNT', +this.commentCount)
+      store.commit('PLUG_COMMENT_COUNT', +this.commentCount)
     }
     commentList.unshift(e)
   }
@@ -168,7 +180,7 @@ function pushComment (e) {
 function handleCommentCount (val) {
   commentCount.value = val
   if (sceneCode === 0) {
-    store.commit('EC_COMMENT_COUNT', +val)
+    store.commit('PLUG_COMMENT_COUNT', +val)
   }
 }
 // 动态 评论框显示
@@ -182,7 +194,6 @@ function handleLike (val) {
 }
 
 // 头像点击
-const emit = defineEmits(['handleCustom', 'getMoreComments', 'handleHeadPortrait'])
 function handleHeadPortrait (val) {
   emit('handleHeadPortrait', val)
 }
