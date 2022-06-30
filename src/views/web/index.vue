@@ -16,7 +16,7 @@
     <!-- 公共 评论发表 -->
     <div
       ref="webCommentBox"
-      v-if="webCommentPublish || dynamicCommentShow"
+      v-if="plugWebCommentPublish || dynamicCommentShow"
       :style="{margin: dynamicCommentShow ? '20px 0 0 0': '0'}">
       <CommentPublish
         :topicId="topicId"
@@ -25,7 +25,7 @@
 
     <!-- 详情 评论头部及数量 -->
     <CommentTitle
-      v-if="sceneCode === 0"
+      v-if="plugSceneCode === 0"
       :dynamicLikeCommentState="dynamicLikeCommentState"
       @getCommentList="getCommentList"></CommentTitle>
 
@@ -42,7 +42,7 @@
       @handleHeadPortrait="handleHeadPortrait"></CommentList>
 
     <!-- 详情 悬浮评论 -->
-    <transition name="footerComment" v-if="webFixedBoxState">
+    <transition name="footerComment" v-if="plugWebFixedBoxState">
       <SuspendedLikeComment
         :topicId="topicId"
         @handleLike="handleLike"
@@ -53,8 +53,9 @@
 
 <script setup name="webEntrance">
 import { ref, reactive, nextTick, onMounted, inject, computed } from 'vue'
-import { useStore } from 'vuex'
-import comment from '@/api/comment'
+import { storeToRefs } from 'pinia'
+import { commentStore } from '@/store'
+import commentApi from '@/api/comment'
 import FuncLikeComment from './Common/FuncLikeComment.vue'
 import CommentPublish from './Common/CommentPublish.vue'
 import CommentTitle from './Details/CommentTitle.vue'
@@ -84,22 +85,8 @@ let likeCount = ref(0) // 动态 主题点赞数量
 let dynamicCommentShow = ref(false) // 动态评论框显示
 
 // 计算属性
-const store = useStore()
-const sceneCode = computed(() => {
-  return store.state.moduleComment.plugSceneCode
-})
-const appCode = computed(() => {
-  return store.state.moduleComment.plugAppCode
-})
-const language = computed(() => {
-  return store.state.moduleComment.plugLanguage
-})
-const webCommentPublish = computed(() => {
-  return store.state.moduleComment.plugWebCommentPublish
-})
-const webFixedBoxState = computed(() => {
-  return store.state.moduleComment.plugWebFixedBoxState
-})
+const comment = commentStore()
+const { plugSceneCode, plugAppCode, plugLanguage, plugWebCommentPublish, plugWebFixedBoxState } = storeToRefs(comment)
 
 // DOM加载完
 onMounted(() => {
@@ -111,10 +98,10 @@ const $bizCode = inject('$bizCode')
 // 获取评论列表
 function getCommentList (pageNum, sortValue) {
   const params = {
-    app_code: appCode,
+    app_code: plugAppCode,
     source_id: propList.sourceId,
     theme_id: '',
-    language: language,
+    language: plugLanguage,
     page: 1,	 
     page_size: 10,
     limit_sub_comment_count: 3, 
@@ -126,7 +113,7 @@ function getCommentList (pageNum, sortValue) {
   if (sortValue) {
     params.sort_type = sortValue
   }
-  comment.getCommentList(params).then(res => {
+  commentApi.getCommentList(params).then(res => {
     if(res.data.bizCode === $bizCode.success) {
       const resList = res.data.data
       const webCommentList = ref(null)

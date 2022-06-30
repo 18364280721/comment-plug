@@ -1,6 +1,7 @@
 import axios from 'axios'
-import store from '@/store'
+import { commentStore } from '@/store'
 
+const comment = commentStore()
 // 创建axios实例
 const service = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // api的base_url
@@ -16,9 +17,10 @@ service.interceptors.request.use(
     config.headers = {
       //'Content-Type':'application/x-www-form-urlencoded',   // 传参方式表单
       'Content-Type':'application/json;charset=UTF-8',        // 传参方式json
-      'Authorization': `Bearer ${store.state.moduleComment.plugTenantToken}`, // 这里自定义配置，这里传的是token
-      'language': store.state.moduleComment.plugLanguage
+      'Authorization': `Bearer ${comment.plugTenantToken}`, // 这里自定义配置，这里传的是token
+      'language': comment.plugLanguage
     }
+    console.log(config)
     return config
   },error => {
     Promise.reject(error)

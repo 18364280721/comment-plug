@@ -3,8 +3,9 @@
  * @Author Silas
  * @date 2022/5/11
 **/
-import store from '@/store'
+import { commentStore } from '@/store'
 
+const comment = commentStore()
 // 时间转换
 export function getTimer(date) {
   if (!date) return
@@ -92,8 +93,8 @@ export function getMessageTips(growth, fudou, growthEanble, funType) {
     en_US: 'Like success',
     zh_TW: '點讚成功'
   }
-  const language = store.state.moduleComment.ecLanguage
-  const scenario = store.state.moduleComment.ecApplicationScenario
+  const language = comment.plugLanguage
+  const scenario = comment.plugApplicationScenario
   /**
    * fuDouSendResult
    * needSendFuDou needSendFuDou

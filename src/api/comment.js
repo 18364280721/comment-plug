@@ -1,5 +1,4 @@
 import request from '@/api/request'
-import store from '../store'
 
 export default {
   /**

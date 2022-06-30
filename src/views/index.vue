@@ -31,7 +31,7 @@
 
 <script setup name="plugCommentEntrance">
 import { ref, onMounted, watch, shallowRef } from 'vue'
-import { useStore } from 'vuex'
+import { commentStore } from '@/store'
 import webEntrance from './web/index.vue'
 import h5Entrance from './app/index.vue'
 
@@ -216,36 +216,39 @@ if (propList.applicationType) {
     appType = 4
   }
 }
-const store = useStore()
-store.commit('PLUG_APPLICATION_SCENARIO', propList.applicationScenario)
-store.commit('PLUG_SCENE_CODE', propList.sceneCode)
-store.commit('PLUG_APP_CODE', propList.appCode)
-store.commit('PLUG_LANGUAGE', lang)
-store.commit('PLUG_THEME_COLOR', propList.themeColor)
-store.commit('PLUG_TENANT_TOKEN', propList.tenantToken)
-store.commit('PLUG_APPLICATION_TYPE', appType)
-store.commit('PLUG_SORT_STATE', propList.sortState)
-store.commit('PLUG_CUSTOM_COMMENT_STATE', propList.customCommentState)
-store.commit('PLUG_CUSTOM_COMMENT_DELETE_STATE', propList.customCommentDeleteState)
-store.commit('PLUG_CUSTOM_COMMENT_PHOTO_SEE_STATE', propList.customCommentPhotoSeeState)
-store.commit('PLUG_COMMENT_WORD_MAX', propList.commentWordMax)
-store.commit('PLUG_COMMENT_PHOTO_MAX', propList.commentPhotoMax)
-store.commit('PLUG_REPLY_WORD_MAX', propList.replyWordMax)
-store.commit('PLUG_REPLY_PHOTO_STATE', propList.replyPhotoState)
-store.commit('PLUG_REPLY_PHOTO_MAX', propList.replyPhotoMax)
-store.commit('PLUG_WEB_COMMENT_PUBLISH', propList.webCommentPublish)
-store.commit('PLUG_WEB_FIXED_BOX_STATE', propList.webFixedBoxState)
-store.commit('PLUG_WEB_FIXED_BOX_LIKE_STATE', propList.webFixedBoxLikeState)
-store.commit('PLUG_WEB_FIXED_BOX_LIKE_NAME', propList.webFixedBoxLikeName)
-store.commit('PLUG_WEB_FIXED_BOX_BOTTOM', typeof (propList.webFixedBoxBottom) === 'string' ? propList.webFixedBoxBottom : `${propList.webFixedBoxBottom}px`)
-store.commit('PLUG_WEB_FIXED_BOX_RIGHT', typeof (propList.webFixedBoxRight) === 'string' ? propList.webFixedBoxRight : `${propList.webFixedBoxRight}px`)
-store.commit('PLUG_QUICK_ENTRANCE', propList.quickEntrance)
-store.commit('PLUG_APP_FIXED_BOX_STATE', propList.appFixedBoxState)
-store.commit('PLUG_APP_FIXED_BOX_LIKE_STATE', propList.appFixedBoxLikeState)
-store.commit('PLUG_BUTTON_TYPE', propList.buttonType)
-store.commit('PLUG_BUTTON_NAME', propList.buttonName)
-store.commit('PLUG_BUTTON_STYLE', propList.buttonStyle)
-store.commit('PLUG_IOS_BOTTOM', propList.iOSBottom)
+
+const comment = commentStore()
+comment.$patch({
+  plugApplicationScenario: propList.applicationScenario, // 应用场景
+  plugSceneCode: propList.sceneCode, // 使用场景
+  plugAppCode: propList.appCode, // 场景码
+  plugLanguage: lang, // 语言环境
+  plugThemeColor: propList.themeColor, // 主题色
+  plugTenantToken: propList.tenantToken, // token值
+  plugApplicationType: appType, // 应用类型
+  plugSortState: propList.sortState, // 排序是否显示
+  plugCustomCommentState: propList.customCommentState, // 是否启用自定义评论框
+  plugCustomCommentDeleteState: propList.customCommentDeleteState, // 是否启用自定义评论删除
+  plugCustomCommentPhotoSeeState: propList.customCommentPhotoSeeState, // 是否启用自定义评论图片查看
+  plugCommentWordMax: propList.commentWordMax, // 评论文字最大数量
+  plugCommentPhotoMax: propList.commentPhotoMax, // 评论图片最大数量
+  plugReplyWordMax: propList.replyWordMax, // 回复文字最大数量
+  plugReplyPhotoState: propList.replyPhotoState, // 回复是否上传图片
+  plugReplyPhotoMax: propList.replyPhotoMax, // 回复图片最大数量
+  plugWebCommentPublish: propList.webCommentPublish, // 页面评论框是否显示
+  plugWebFixedBoxState: propList.webFixedBoxState, // web详情页悬浮框是否显示
+  plugWebFixedBoxLikeState: propList.webFixedBoxLikeState, // web详情页悬浮框点赞是否显示
+  plugWebFixedBoxLikeName: propList.webFixedBoxLikeName, // web详情页悬浮框点赞按钮名称
+  plugWebFixedBoxBottom: typeof (propList.webFixedBoxBottom) === 'string' ? propList.webFixedBoxBottom : `${propList.webFixedBoxBottom}px`, // web详情页悬浮框距离底部距离
+  plugWebFixedBoxRight: typeof (propList.webFixedBoxRight) === 'string' ? propList.webFixedBoxRight : `${propList.webFixedBoxRight}px`, // web详情页悬浮框距离右侧距离
+  plugAppFixedBoxState: propList.quickEntrance, // app详情页悬浮框是否显示
+  plugAppFixedBoxLikeState: propList.appFixedBoxState, // app详情页悬浮框点赞是否显示
+  plugQuickEntrance: propList.appFixedBoxLikeState, // 快捷入口
+  plugButtonType: propList.buttonType, // 按钮类型
+  plugButtonName: propList.buttonName, // 按钮名称
+  plugButtonStyle: propList.buttonStyle, // 按钮样式
+  plugiOSBottom: propList.iOSBottom, // iOS底部刘海
+})
 
 // 组件显示
 onMounted(() => {
